@@ -10,3 +10,13 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+debug/
+.idea/
+*.toml
+imageEater
+imageEater_*
+files/*.png
+files/*.jpg
+files/*.gif
+files/*.jpeg
