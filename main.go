@@ -62,6 +62,8 @@ func main() {
 
 	// add router
 	router := mux.NewRouter()
+	// add REST API method
+	router.HandleFunc("/images", LoadImages).Methods("POST")
 
 	// start http server
 	log.Printf("starting HTTP server")
