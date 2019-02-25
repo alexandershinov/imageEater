@@ -224,6 +224,13 @@ func TestSaveImageFromBase64(t *testing.T) {
 			},
 			*new(png.FormatError),
 		},
+		"bad image type": {
+			SaveImageFromBase64FixtureData{
+				Image:     "data:image/ggg;base64,iVBvjL/SAniTUzynI4xQ9yrk10yB6urH8WUp3C8Ee6yiOgpyq1NgWcm8c9nb5wXcCXAqU3LiBHyS2WkBPDQokuBN9dyOMB4kusUw+1Sm+4GQfUoB80/NgqTTWX7t8gozrbjzXm+cKoplpzUpzb1MyeJRXdlQKgvSIV67zM9oINi2qrXpnfuRia/jw6bQLJdMBKmUu5ctjxqnCwfiYqkOtfJfyXgG1nzyHEw8voRqnmV8+RLIL3zO3ZbWhxfNGGyncZo4jV0WiBVuZJaLEnAa1FCKdsKIK712wSTYsyIFitalQ9H6GbD7bQVULprs/o12TlBkkls4Kw7hVH+BvajETvdlnpo0hv2PJI4QvbAP9YoJoE+bQv3tTsFAf+FI5RMr3Ag7LaEVY8GpeHvrsgJj6sZKECr1EKsywNRNNbA2VwnHnl8IjclJ1PNCgf22sTODWOBGxpUjB1lfetK/oEzyB161+dK88r6xSv3iWKWhiQ3izfjCc5Cz6jM4uOA1HLGJ/n0EAGdBHinPnVyfCkax/1iwrxt+07r6idam3NFgmhO32aSQjiBN3Hqy9Fp4jNKwKUZlaPUNxCIuughL15TBrldyQZ9Kn4I4+i4cjSzSJXe6tU0wnCmOyGaDOEsF9eyC56jit8FFXj/SxE9xSn10jFJ/lBbGQ5zyCry4/jBseuMDKFu0HD5/Jeevk7NmvnN9UnwE6aZ7gjxeXzQ906UWHHIVR9jZAG5KkLL2VdxRwf8TwzzrrOw/iJxGVaxKn4wYfEPQGKfSczsKaH6px7xzrwAcR8LbmAp+q/cWxIOjKuwHclpARZdd7DdOZViO042hBYhR6W+x9xdpzp1ulkSOwxCVzH7+Xj/jGr6N0YQ5nBq+Af/WIRvIaSE1ZusvAhyd19H4l/ipwwfDtzGqK6tiiwyPkCY9I6e2/xNMVdhZ3KYr7Vr+hBadgE9+uqd7+n+Jx/sbgLnTlrubkbkAAAAASUVORK5CYII=",
+				Directory: "files",
+			},
+			new(formatError),
+		},
 	} {
 		t.Run(name, test.Do)
 	}
