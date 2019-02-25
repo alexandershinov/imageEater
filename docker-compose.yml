@@ -1,0 +1,13 @@
+version: "2"
+services:
+  api:
+    image: golang:1.11.4-alpine
+    restart: always
+    build: .
+    dns:
+      - 8.8.8.8
+    command: /go/bin/imageEater -config="/opt/imageEater/config.toml"
+    volumes:
+      - ./files:/opt/imageEater/files
+    ports:
+      - 4000:4000
