@@ -141,7 +141,7 @@ func SaveImageFromBase64(sourceBase64 string, destinationDirectory string) (err 
 		pic, err = gif.Decode(r)
 	default:
 		log.Printf("FILE TYPE ERROR: %s\n", b64Groups[1])
-		return errors.New("file type error")
+		return &formatError{"image(png/jpg/gif)", b64Groups[1]}
 	}
 	if err != nil {
 		return
