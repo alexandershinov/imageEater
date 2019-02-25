@@ -9,14 +9,16 @@ go:
 git:
   depth: 1
 
-install: true
+install:
+  - go get github.com/golangci/golangci-lint/cmd/golangci-lint
+  - go get -d -v ./...
+  - go get github.com/stretchr/testify/assert
+  - go install -v ./...
 
 notifications:
   email: false
 
-before_script:
-  - go install -mod vendor github.com/golangci/golangci-lint/cmd/golangci-lint
-
 script:
+  - go vet ./...
   - golangci-lint run       # run a bunch of code checkers/linters in parallel
   - go test -v -race ./...  # Run all the tests with the race detector enabled

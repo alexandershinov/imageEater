@@ -108,10 +108,10 @@ func (test *createThumbnailFixture) Do(t *testing.T) {
 	if test.Data.CreateTestImage {
 		img := image.NewRGBA(image.Rectangle{image.Point{0, 0}, image.Point{10, 10}})
 		f, _ := os.Create(test.Data.ImageFileName)
-		png.Encode(f, img)
+		_ = png.Encode(f, img)
 	}
-	defer os.Remove(test.Data.ImageFileName)
-	defer os.Remove(test.Data.PreviewFileName)
+	defer func() { _ = os.Remove(test.Data.ImageFileName) }()
+	defer func() { _ = os.Remove(test.Data.PreviewFileName) }()
 	assert.IsType(t, test.Result, createThumbnail(test.Data.ImageFileName, test.Data.PreviewFileName, test.Data.Width, test.Data.Height))
 }
 
@@ -194,9 +194,9 @@ type SaveImageFromBase64Fixture struct {
 
 func (test *SaveImageFromBase64Fixture) Do(t *testing.T) {
 	if test.Data.Directory != "" {
-		os.Mkdir(test.Data.Directory, 777)
+		_ = os.Mkdir(test.Data.Directory, 0777)
 	}
-	defer os.RemoveAll(test.Data.Directory)
+	defer func() { _ = os.RemoveAll(test.Data.Directory) }()
 	assert.IsType(t, test.Result, SaveImageFromBase64(test.Data.Image, test.Data.Directory))
 }
 
