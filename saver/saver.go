@@ -81,7 +81,7 @@ func SaveImageFromPart(sourceFile *multipart.Part, destinationDirectory string) 
 	log.Printf("SAVE FILE TO %s\n", destinationFilePath)
 	// create a new file in the desired location
 	destinationFile, err = os.Create(destinationFilePath)
-	defer destinationFile.Close()
+	defer func() { _ = destinationFile.Close() }()
 	if err != nil {
 		return
 	}
@@ -96,7 +96,7 @@ func SaveImageFromPart(sourceFile *multipart.Part, destinationDirectory string) 
 	// create 100x100 preview
 	err = createThumbnail(destinationFilePath, strings.Replace(destinationFilePath, sourceFile.FileName(), "min_"+sourceFile.FileName(), 1), 100, 100)
 	if err != nil {
-		os.Remove(destinationFilePath)
+		_ = os.Remove(destinationFilePath)
 		return
 	}
 
